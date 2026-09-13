@@ -1,7 +1,7 @@
 This is my silly and cute emacs config. It includes 
 - The emacs logo replaced with a picture of a baby harp seal
 - [Kaomoji](https://en.wikipedia.org/wiki/Kaomoji) inserted at random places
-- pastel colors on a high contrast background (inspired by https://github.com/vic/rebecca-theme)
+- pastel colors on a high contrast background (intended to use the same palette a field of wildflowers in a summer night) (inspired by https://github.com/vic/rebecca-theme)
 -  a loopy cursive comments font (taken from https://github.com/melissaboiko/girly-notebook-theme)
 -  The option to turn the text rainbow colored (using https://github.com/xuchunyang/lolcat.el)
 -  Automatically rainbow-colored welcome page, with the option to disable for readability (repurposing code from https://github.com/xuchunyang/lolcat.el)
