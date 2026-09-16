@@ -38,10 +38,11 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
      ;; git
+     (haskell :variables haskell-completion-backend 'dante)
      helm
      ;; lsp
      ;; markdown
@@ -51,9 +52,12 @@ This function should only modify configuration layer settings."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     syntax-checking
      ;; version-control
-     treemacs)
+     themes-megapack
+     treemacs
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t))
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -64,7 +68,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(dante lcr lolcat)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
