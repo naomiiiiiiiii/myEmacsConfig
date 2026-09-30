@@ -569,6 +569,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (add-to-list 'exec-path "/Users/nspargo/.ghcup/bin" )
+  (add-to-list 'exec-path "/opt/homebrew/bin" )
+  (add-to-list 'load-path "/Users/nspargo/.emacs.d/lib")
   )
 
 (defun dotspacemacs/user-config ()
