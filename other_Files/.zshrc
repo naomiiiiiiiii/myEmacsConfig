@@ -100,3 +100,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export XLEPATH="/usr/local/bin/xle-intelmac64-2017-09-25"
+export PATH=${XLEPATH}/bin:$PATH
+export LD_LIBRARY_PATH=${XLEPATH}/lib:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=${XLEPATH}/lib:$DYLD_LIBRARY_PATH
+export TCLLIBPATH=${XLEPATH}/tcl/scripts/tcl
+export TCL_LIBRARY=${XLEPATH}/tcl/scripts/tcl
+export TKLIBPATH=${XLEPATH}/tcl/scripts/tk
+export TK_LIBRARY=${XLEPATH}/tcl/scripts/tk
+export DYLD_LIBRARY_PATH=${XLEPATH}/lib/
+export REDDIT_PATH=./reddit-post-scraping-tool
