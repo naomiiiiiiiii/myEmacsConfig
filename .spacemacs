@@ -40,6 +40,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
+     coq
      emacs-lisp
      ;; git
      (haskell :variables haskell-completion-backend 'dante)
