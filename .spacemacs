@@ -235,7 +235,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 10.0
+                               :size 27.0
                                :weight normal
                                :width normal)
 
@@ -577,8 +577,77 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (load "/Users/nspargo/darais-unicode-input/unicode.el")
+
+  ;; Apply lolcat rainbow colors using overlays to preserve widgets
+  (defun my-lolcat-spacemacs-buffer ()
+    "Apply rainbow colors using overlays to preserve widgets."
+    (interactive)
+    (when (get-buffer spacemacs-buffer-name)
+      (with-current-buffer spacemacs-buffer-name
+        (let ((freq 0.1)
+              (spread 3.0)
+              (seed (random 256)))
+          (save-excursion
+            (goto-char (point-min))
+            (let ((os seed)
+                  (line-start (point)))
+              (while (not (eobp))
+                (let* ((i (- (point) line-start))
+                       (color (format "#%02x%02x%02x"
+                                      (truncate (+ (* (sin (+ (* freq (+ os (/ i spread))) 0)) 127) 128))
+                                      (truncate (+ (* (sin (+ (* freq (+ os (/ i spread))) 2.0944)) 127) 128))
+                                      (truncate (+ (* (sin (+ (* freq (+ os (/ i spread))) 4.1888)) 127) 128))))
+                       (ov (make-overlay (point) (1+ (point)))))
+                  (overlay-put ov 'face `(:foreground ,color))
+                  (when (eq (char-after) ?\n)
+                    (setq os (1+ os)
+                          line-start (1+ (point)))))
+                (forward-char 1))))))))
+
+  ;; Run after Spacemacs initialization with a delay
+  (run-with-idle-timer 1 nil #'my-lolcat-spacemacs-buffer)
   )
 
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(custom-enabled-themes '(rebecca))
+   '(custom-safe-themes
+     '("cffbae32e5e3859f671c4b1dc2a0d95a4a6f2d071f7d9b9adbe66aaf1a865008" "e8c3c56c4d7c62f5b9360c7c860d721a092789f191051e6093793548decb0d32" "ade194273a74776a3043049bdab532587813493ec9530d9ec7bb19c29c3ee8bd" "22cc84baba6e216c32cf105bb17ea10b268ba6bbc9c6a0d4fb46609225db4dd6" default))
+   '(global-display-line-numbers-mode t)
+   '(highlight-parentheses-colors '("Springgreen3" "magenta1" "yellow1" "orange"))
+   '(highlight-parentheses-delay 0.2)
+   '(package-selected-packages
+     '(lolcat ace-link ace-window afternoon-theme aggressive-indent alect-themes all-the-icons ample-theme ample-zen-theme annalist anti-zenburn-theme anzu apropospriate-theme async auto-compile auto-highlight-symbol autothemer avy avy-jump-helm-line badwolf-theme bind-map birds-of-paradise-plus-theme bubbleberry-theme busybee-theme centered-cursor-mode cfrs cherry-blossom-theme chocolate-theme clang-format clean-aindent-mode clues-theme cmm-mode color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow column-enforce-mode compat cond-let cyberpunk-theme dakrone-theme dante darkmine-theme darkokai-theme darktooth-theme dash define-word devdocs diminish dired-quick-sort disable-mouse django-theme doom-themes dotenv-mode dracula-theme drag-stuff dumb-jump editorconfig ef-themes elisp-def elisp-demos elisp-slime-nav emr epl espresso-theme eval-sexp-fu evil evil-anzu evil-args evil-cleverparens evil-collection evil-easymotion evil-escape evil-evilified-state evil-exchange evil-goggles evil-iedit-state evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exotica-theme expand-region eyebrowse eziam-themes f fancy-battery farmhouse-themes flatland-theme flatui-theme gandalf-theme girly-notebook-theme golden-ratio google-translate gotham-theme goto-chg grandshell-theme gruber-darker-theme gruvbox-theme haskell-mode haskell-snippets hc-zenburn-theme helm helm-ag helm-comint helm-core helm-descbinds helm-hoogle helm-lsp helm-make helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop helm-xref hemisu-theme heroku-theme hide-comnt highlight-indentation highlight-numbers highlight-parentheses hl-todo hlint-refactor holy-mode ht hungry-delete hybrid-mode hydra iedit imenu-list indent-guide info+ inkpot-theme inspector ir-black-theme jazz-theme jbeans-theme kaolin-themes light-soap-theme link-hint list-utils lorem-ipsum lsp-haskell lsp-mode lsp-origami lsp-treemacs lsp-ui lush-theme lv macrostep madhat2r-theme markdown-mode material-theme minimal-theme modus-themes moe-theme molokai-theme monochrome-theme monokai-theme multi-line mustang-theme nameless naquadah-theme noctilux-theme obsidian-theme occidental-theme oldlace-theme omtose-phellack-themes open-junk-file org-superstar organic-green-theme origami overseer page-break-lines paradox paredit parent-mode password-generator pcre2el persp-mode pfuture phoenix-dark-mono-theme phoenix-dark-pink-theme pkg-info planet-theme popup popwin posframe powerline professional-theme projectile purple-haze-theme quickrun railscasts-theme rainbow-delimiters rebecca-theme restart-emacs reverse-theme s seti-theme shut-up smartparens smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme space-doc spacegray-theme spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup spinner string-edit-at-point string-inflection subatomic-theme subatomic256-theme sublime-themes sunny-day-theme symbol-overlay symon tango-2-theme tango-plus-theme tangotango-theme tao-theme term-cursor toc-org toxi-theme transient treemacs treemacs-evil treemacs-icons-dired treemacs-persp treemacs-projectile twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme undo-fu-session uuidgen vi-tilde-fringe visual-fill-column volatile-highlights vundo wfnames wgrep which-key white-sand-theme window-purpose winum writeroom-mode ws-butler yasnippet zen-and-art-theme zenburn-theme zonokai-emacs)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:inherit nil :extend nil :stipple nil :background "Black" :foreground "orchid1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 250 :width normal :foundry "nil" :family "Source Code Pro"))))
+   '(cursor ((t (:background "LemonChiffon1"))))
+   '(evil-ex-lazy-highlight ((t (:background "SeaGreen2" :foreground "maroon2" :weight semi-bold))))
+   '(font-lock-comment-face ((t (:foreground "RoyalBlue1" :slant italic :family "Victor Mono"))))
+   '(font-lock-doc-face ((t (:foreground "#BDA9FF"))))
+   '(font-lock-keyword-face ((t (:foreground "SeaGreen1" :weight bold))))
+   '(font-lock-string-face ((t (:foreground "DeepSkyBlue1"))))
+   '(font-lock-variable-name-face ((t (:foreground "cornflower blue"))))
+   '(haskell-keyword-face ((t (:foreground "plum1" :weight bold))))
+   '(haskell-type-face ((t (:inherit font-lock-type-face :weight semi-bold))))
+   '(highlight ((t (:background "SlateBlue2" :foreground "LightGoldenrod1"))))
+   '(hl-line ((t (:extend t :background "#383a62"))))
+   '(hl-todo ((t (:foreground "DeepPink1" :weight bold))))
+   '(line-number ((t (:background "Black" :foreground "SeaGreen1"))))
+   '(region ((t (:extend t :background "cornflower blue" :foreground "LightGoldenrod1")))))
+  )
