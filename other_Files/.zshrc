@@ -100,6 +100,22 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# opam configuration
+[[ ! -r /Users/naomispargo/.opam/opam-init/init.zsh ]] || source /Users/naomispargo/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+#old sml config
+#export PATH="$PATH:/usr/local/smlnj/bin"
+
+alias python=/usr/bin/python3
+alias pip=/Users/naomispargo/Library/Python/3.8/bin
+export PYTHONPATH="${PYTHONPATH}:/Users/naomispargo/Library/Python/3.8/bin"
+
+
+#sml config
+path+=('/usr/local/smlnj/bin')
+alias smlnj="rlwrap sml"
+[ -f "/Users/naomispargo/.ghcup/env" ] && source "/Users/naomispargo/.ghcup/env"
+
 #lolcat
 alias lls="ls | lolcat"
 alias llsl="ls -l | lolcat"
