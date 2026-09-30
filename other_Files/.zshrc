@@ -100,6 +100,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#lolcat
+alias lls="ls | lolcat"
+alias llsl="ls -l | lolcat"
+alias llsa="ls -a | lolcat"
+
 export XLEPATH="/usr/local/bin/xle-intelmac64-2017-09-25"
 export PATH=${XLEPATH}/bin:$PATH
 export LD_LIBRARY_PATH=${XLEPATH}/lib:$LD_LIBRARY_PATH
