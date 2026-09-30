@@ -572,6 +572,14 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+;; Prevent @Error (use-package): Cannot load evil-evilified-state@
+  (let ((evilified-dir
+         (expand-file-name
+          "layers/+distributions/spacemacs-bootstrap/local/evil-evilified-state"
+          user-emacs-directory)))
+    (when (file-readable-p
+           (expand-file-name "evil-evilified-state.el" evilified-dir))
+      (add-to-list 'load-path evilified-dir t)))
   (add-to-list 'exec-path "/Users/nspargo/.ghcup/bin" )
   (add-to-list 'exec-path "/opt/homebrew/bin" )
   (add-to-list 'load-path "/Users/nspargo/.emacs.d/lib")
